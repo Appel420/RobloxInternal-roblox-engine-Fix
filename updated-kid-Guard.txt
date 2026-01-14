@@ -1,0 +1,59 @@
+--- roblox_moderation_engine_old.erl
++++ roblox_moderation_engine_new.erl
+@@
+- detect_violation(ChatLog, User) ->
+-    Flags = scan_for_keywords(ChatLog) ++ scan_for_behavior(User),
+-    case lists:any(fun is_severe/1, Flags) of
+-        true  -> ban_user(User, "automated enforcement");
+-        false -> ok
+-    end.
++ detect_violation(ChatLog, User) ->
++    % NEW: Age-aware retention & child protection layer
++    Age = get_verified_age(User),
++    IsChild = Age =< 12,
++    % Step 1: Immediate retention gate for COPPA compliance
++    if
++        IsChild ->
++            % Under 13 → no mic activation, no persistent voice scan, no storage
++            disable_voice_collection(User),
++            drop_voice_buffer(User),
++            % Only scan visible text; never escalate on voice alone
++            Flags = scan_text_only(ChatLog),
++            case lists:any(fun(F) -> is_severe(F) andalso not is_child_context(F) end, Flags) of
++                true  -> 
++                    % Child false-positive override
++                    log_child_review_needed(User, Flags),
++                    hold_not_ban(User);  % queue for human, never auto-terminate
++                false -> ok
++            end;
++        true ->
++            % Adult path unchanged
++            Flags = scan_for_keywords(ChatLog) ++ scan_for_behavior(User),
++            case lists:any(fun is_severe/1, Flags) of
++                true  -> ban_user(User, "automated enforcement");
++                false -> ok
++            end
++    end.
++% NEW: Child context false-positive filter
++is_child_context(Flag) ->
++    ChildSafeWords = ,
++    lists:any(fun(Word) -> string:find(Flag, Word) /= nomatch end, ChildSafeWords).
++% NEW: Hold instead of ban for child accounts under review
++hold_not_ban(User) ->
++    set_moderation_state(User, review_hold),
++    notify_human_reviewer(User, "Potential child false positive – manual review required").
+% Additional retention policy module (new file: child_retention_policy.erl)
+-module(child_retention_policy).
+-export( ).
+
+apply(UserID) ->
+    case get_verified_age(UserID) of
+        Age when Age =< 12 ->
+            % COPPA strict: zero persistent collection
+            purge_voice_data(UserID),
+            purge_chat_history_after_24h(UserID),
+            disable_targeted_ads(UserID),
+            set_privacy_mode(UserID, maximum);
+        _ ->
+            ok
+    end.
