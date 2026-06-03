@@ -2,6 +2,14 @@
 
 This repository contains example Luau and Erlang moderation snippets that prioritize child safety and reduced data retention.
 
+## Compliance documents
+
+- [Compliance overview](COMPLIANCE.md)
+- [Privacy notice](PRIVACY_NOTICE.md)
+- [Verifiable parental consent](PARENTAL_CONSENT.md)
+- [Data retention and deletion](DATA_RETENTION.md)
+- [Children's privacy checklist](CHILD_PRIVACY_CHECKLIST.md)
+
 ## Included safeguards
 
 - Age-gate moderation before severe enforcement
