@@ -7,7 +7,14 @@
       "type": "string"
     },
     "type": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "created",
+        "updated",
+        "deleted",
+        "escalated",
+        "reviewed"
+      ]
     },
     "timestamp": {
       "type": "string",

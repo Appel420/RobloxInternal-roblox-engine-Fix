@@ -7,7 +7,17 @@
       "type": "string"
     },
     "action": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "create",
+        "update",
+        "delete",
+        "export",
+        "redact",
+        "purge",
+        "review_hold",
+        "ban"
+      ]
     },
     "timestamp": {
       "type": "string",

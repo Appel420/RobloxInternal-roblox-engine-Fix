@@ -11,7 +11,23 @@
       "format": "date-time"
     },
     "records": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "recordId": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "recordId",
+          "category"
+        ],
+        "additionalProperties": true
+      }
     }
   },
   "required": [
