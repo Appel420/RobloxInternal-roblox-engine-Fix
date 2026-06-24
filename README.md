@@ -1,9 +1,12 @@
-# COPPA-focused moderation notes
+# Echo Guardian
 
-This repository contains example Luau and Erlang moderation snippets that prioritize child safety and reduced data retention.
+This repository contains child-safety, privacy, governance, and retention guidance for moderation-oriented systems.
 
-## Compliance documents
+## Key documents
 
+- [Security](SECURITY.md)
+- [Privacy](PRIVACY.md)
+- [Governance](GOVERNANCE.md)
 - [Compliance overview](COMPLIANCE.md)
 - [Privacy notice](PRIVACY_NOTICE.md)
 - [Verifiable parental consent](PARENTAL_CONSENT.md)
@@ -13,18 +16,12 @@ This repository contains example Luau and Erlang moderation snippets that priori
 ## Included safeguards
 
 - Age-gate moderation before severe enforcement
-- Disable voice collection for under-13 users
+- Disable voice collection for child accounts
 - Purge voice buffers instead of retaining them
 - Use text-only review for child accounts
 - Queue borderline child cases for human review
-- Keep the adult moderation path unchanged
-
-## Retention policy
-
-- No persistent voice storage for child accounts
-- Limited chat retention for child accounts
-- Privacy settings should default to the most restrictive safe mode available
+- Keep adult moderation paths unchanged
 
 ## Notes
 
-This repository documents COPPA-focused safeguards, but full compliance depends on the surrounding product, consent flow, notices, retention rules, and legal review.
+This repository documents safety and privacy practices, but final compliance depends on the surrounding product, consent flow, notices, retention rules, and legal review.

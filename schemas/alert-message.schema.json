@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Alert Message",
+  "type": "object",
+  "properties": {
+    "alertId": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "alertId",
+    "severity",
+    "message"
+  ],
+  "additionalProperties": true
+}
