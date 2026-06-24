@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Export Manifest",
+  "type": "object",
+  "properties": {
+    "manifestId": {
+      "type": "string"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "recordId": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "recordId",
+          "category"
+        ],
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": [
+    "manifestId",
+    "generatedAt",
+    "records"
+  ],
+  "additionalProperties": true
+}

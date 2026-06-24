@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Audit Entry",
+  "type": "object",
+  "properties": {
+    "entryId": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "create",
+        "update",
+        "delete",
+        "export",
+        "redact",
+        "purge",
+        "review_hold",
+        "ban"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "entryId",
+    "action",
+    "timestamp"
+  ],
+  "additionalProperties": true
+}
